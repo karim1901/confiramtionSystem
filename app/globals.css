@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+body{
+  font-family: Arial, Helvetica, sans-serif;
+  min-width: 350px;
+  background:#eeebe7;
+}
+
+
+
+
+.recharts-pie path:focus,
+.recharts-pie-sector:focus,
+svg path:focus {
+  outline: none;
+}

@@ -19,12 +19,7 @@ export default function Home() {
     setID(target.value)
   }
 
-  useEffect(() => {
-    if (user) {
-        router.push('/TrackingOrders')
 
-    }
-  }, [user]);
 
 
   const VerifyID = async () => {
@@ -39,6 +34,8 @@ export default function Home() {
       setUser(res.data)
 
       console.log(res.data)
+
+      router.push("/TrackingOrders")
 
 
     } catch (error) {

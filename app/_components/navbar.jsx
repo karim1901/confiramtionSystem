@@ -4,11 +4,11 @@ import { IoMdMenu } from "react-icons/io";
 import { FaUserCheck } from "react-icons/fa";
 import { IoIosAddCircle } from "react-icons/io";
 import { RiNumbersFill } from "react-icons/ri";
-
+import { RiLogoutBoxRLine } from "react-icons/ri";
 import { FaBoxesStacked } from "react-icons/fa6";
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useUser } from "../_context/UserContext";
 
 
@@ -21,9 +21,10 @@ const NavBar = () => {
 
   const navRef = useRef(null)
   const sideRef = useRef(null)
+  const router = useRouter()
 
 
-  const {user} = useUser()
+  const { user } = useUser()
 
 
 
@@ -47,6 +48,12 @@ const NavBar = () => {
     side.style.width = "30%"
 
   }
+
+  const logOut = ()=>{
+    localStorage.removeItem('user');
+    router.push("/")
+  }
+
   return (
     <div className={`w-full  bg-antic  ${user == null && "hidden"}`} >
       <div className="flex justify-between p-[1rem]">
@@ -56,22 +63,25 @@ const NavBar = () => {
         </div>
         <IoMdMenu onClick={onSideLeft} className="text-[20px]" />
 
-        <div ref={navRef} className="w-[0] duration-300 z-10 h-screen absolute bg-black top-0 overflow-hidden right-0">
+        <div ref={navRef} className="w-[0] duration-300 z-10 h-screen absolute text-white bg-black top-0 overflow-hidden right-0">
           <h1 className="px-[1rem] text-antic p-[1rem] text-center min-w-max overflow-hidden">Service Confirmation</h1>
 
           <ul className="text-antic "   >
-            <Link href="/addorder" onClick={offSideLeft} >
-              <li className="flex items-center p-[1rem] bg-amber-800 w-[500px] overflow-hidden">
-                <IoIosAddCircle className="text-[1.2rem]" />
-                <p className="px-[.2rem] ">Add Order</p>
-              </li>
-            </Link>
+
             <Link href={"/TrackingOrders"} onClick={offSideLeft} >
               <li className="flex items-center p-[1rem] bg-amber-800 w-[500px] overflow-hidden">
                 <FaBoxesStacked className="text-[1.2rem]" />
                 <p className="px-[.2rem]  ">Tracking Orders</p>
               </li>
             </Link>
+
+            <Link href="/addorder" onClick={offSideLeft} >
+              <li className="flex items-center p-[1rem] bg-amber-800 w-[500px] overflow-hidden">
+                <IoIosAddCircle className="text-[1.2rem]" />
+                <p className="px-[.2rem] ">Add Order</p>
+              </li>
+            </Link>
+
 
 
             <Link href="/statistics" onClick={offSideLeft}>
@@ -81,6 +91,10 @@ const NavBar = () => {
               </li>
             </Link>
 
+            <li className="flex items-center p-[1rem] bg-amber-800 w-[500px] overflow-hidden cursor-pointer " >
+              <RiLogoutBoxRLine className="text-[1.2rem]"  />
+              <p className="px-[.2rem]  " onClick={logOut}>Log Out</p>
+            </li>
           </ul>
         </div>
 

@@ -26,7 +26,7 @@ const NavBar = () => {
   const { user } = useUser()
 
 
-  console.log(path.split("/"))
+  // console.log(path.split("/"))
 
 
   const offSideLeft = () => {

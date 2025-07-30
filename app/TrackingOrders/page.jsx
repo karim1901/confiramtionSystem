@@ -93,8 +93,16 @@ const TrackingOrders = () => {
             // console.log(user)
           let ID = user?.numberOrder;
           let getOrdersList = [];
+
+          let min = 0
+
+          if(user?.name == "ibtissam" || user?.name == "maryam" ){
+            min = 20254000
+          }else{
+            min=3000
+          }
       
-          while (ID >= 20254000) {
+          while (ID >= min) {
             if (!isMounted.current) break; // ✅ توقف عند تفكيك المكون
       
             try {

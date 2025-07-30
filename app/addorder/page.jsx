@@ -237,10 +237,10 @@ const AddOrder = () => {
                 />
                 {errors["parcel-nature"] && <p className="text-red-500">{errors["parcel-nature"]}</p>}
 
-                <input type="text" className='w-full h-[2.2rem] pl-[1rem] rounded-sm' placeholder='commanet' />
+                <input type="text" className='w-full h-[2.2rem] pl-[1rem] rounded-sm hidden' placeholder='commenet' />
 
 
-                <button type='button' className='text-white bg-black p-4 rounded-sm'  onClick={sendOrder} >Send Order</button>
+                <button type='button' className='text-white bg-black p-[.7rem] rounded-md'  onClick={sendOrder} >Send Order</button>
             </form>
 
         </div>

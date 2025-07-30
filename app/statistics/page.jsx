@@ -31,7 +31,7 @@ const Statistics = () => {
             <div className='px-4 flex flex-col gap-4'>
                 <div className='bg-white w-full h-[150px] rounded-md flex items-center justify-between p-4'>
                     <div>
-                        <p className='text-[2rem]'>{user.name == "ibtissam"? orders.livre*15 : orders.livre*10}.00 DH</p>
+                        <p className='text-[2rem]'>{user?.name == "ibtissam"? orders.livre*15 : orders.livre*10}.00 DH</p>
                         <p className='text-[13px] mt-[-10px]'>Total Income</p>
                     </div>
                     <FaMoneyBillWave className='text-[4rem]' />

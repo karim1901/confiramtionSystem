@@ -90,7 +90,7 @@ const TrackingOrders = () => {
         const isMounted = { current: true }; // ✅ مرجعية
       
         const getOrders = async () => {
-            console.log(user)
+            // console.log(user)
           let ID = user?.numberOrder;
           let getOrdersList = [];
       
@@ -121,7 +121,7 @@ const TrackingOrders = () => {
                 getOrdersList.push(data);
               }
 
-                console.log("seccessfylly")
+                // console.log("seccessfylly")
       
               ID--;
               setOrders([...getOrdersList]);

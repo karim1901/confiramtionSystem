@@ -22,10 +22,11 @@ const NavBar = () => {
   const navRef = useRef(null)
   const sideRef = useRef(null)
   const router = useRouter()
-
-
+  const path = usePathname()
   const { user } = useUser()
 
+
+  console.log(path.split("/"))
 
 
   const offSideLeft = () => {
@@ -55,8 +56,8 @@ const NavBar = () => {
   }
 
   return (
-    <div className={`w-full  bg-antic  ${user == null && "hidden"}`} >
-      <div className="flex justify-between p-[1rem]">
+    <div className={`w-full  bg-antic  ${user == null && "hidden"} ${path.split("/")[1]=="" && "hidden"}`} >
+      <div className="flex justify-between p-[1rem] ">
         <div className="flex items-center gap-[.3rem]">
           <FaUserCheck className="" />
           <h1 className="text-black font-semibold">{user?.name}</h1>
@@ -91,7 +92,7 @@ const NavBar = () => {
               </li>
             </Link>
 
-            <li className="flex items-center p-[1rem] bg-amber-800 w-[500px] overflow-hidden cursor-pointer " >
+            <li className="flex items-center p-[1rem] bg-amber-800 w-[500px] overflow-hidden cursor-pointer " onClick={offSideLeft}>
               <RiLogoutBoxRLine className="text-[1.2rem]"  />
               <p className="px-[.2rem]  " onClick={logOut}>Log Out</p>
             </li>

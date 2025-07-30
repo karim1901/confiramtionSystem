@@ -90,7 +90,8 @@ const TrackingOrders = () => {
         const isMounted = { current: true }; // ✅ مرجعية
       
         const getOrders = async () => {
-          let ID = user.numberOrder;
+            console.log(user)
+          let ID = user?.numberOrder;
           let getOrdersList = [];
       
           while (ID >= 20254000) {
@@ -135,7 +136,7 @@ const TrackingOrders = () => {
         return () => {
           isMounted.current = false; // ✅ عند الخروج من المكون
         };
-      }, []);
+      }, [user]);
       
 
 

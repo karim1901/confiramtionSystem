@@ -59,7 +59,7 @@ const NavBar = () => {
       <div className="flex justify-between p-[1rem]">
         <div className="flex items-center gap-[.3rem]">
           <FaUserCheck className="" />
-          <h1 className="text-black font-semibold">Ibtissam</h1>
+          <h1 className="text-black font-semibold">{user?.name}</h1>
         </div>
         <IoMdMenu onClick={onSideLeft} className="text-[20px]" />
 

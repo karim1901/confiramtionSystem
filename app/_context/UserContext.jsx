@@ -14,6 +14,7 @@ export const UserProvider = ({ children }) => {
 
     useEffect(() => {
         const storedUser = localStorage.getItem('user');
+        console.log("!!!",storedUser)
         if (storedUser) {
             setUser(JSON.parse(storedUser));
         }
@@ -30,9 +31,13 @@ export const UserProvider = ({ children }) => {
             localStorage.removeItem('user');
             // router.push("/")
         }
-
-        console.log(user)
     }, [user]);
+
+
+
+    useEffect(()=>{
+        console.log(user)
+    },[user])
 
 
 

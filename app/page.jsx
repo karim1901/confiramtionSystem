@@ -22,7 +22,7 @@ export default function Home() {
 
   useEffect(() => {
     if (user) {
-        router.push("/addorder")
+        router.push("/TrackingOrders")
     }
   },[user])
 

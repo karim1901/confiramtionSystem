@@ -9,6 +9,7 @@ const TrackingOrders = () => {
 
     const {user} = useUser()
 
+    const [search,setSearch] = useState("")
 
     const [orders, setOrders] = useState([])
     const [Load, setLoad] = useState(false)
@@ -154,11 +155,11 @@ const TrackingOrders = () => {
 
 
             <div className='p-4  '>
-                <input type="text" placeholder='Search by Number Phone ' className='mb-4 w-full text-[14px] h-[2rem] rounded-md pl-4 outline-none border-[1px] border-orange-300' />
+                <input type="text" onChange={({target})=>{setSearch(target.value) }} value={search} placeholder='Search by Number Phone ' className='mb-4 w-full text-[14px] h-[2rem] rounded-md pl-4 outline-none border-[1px] border-orange-300' />
 
                 <div className='flex flex-col gap-4'>
                     {
-                        orders.map((item, index) => {
+                        orders.filter( item =>item["INFOS"]["PHONE"].includes(search)).map((item, index) => {
 
                             let phone = "";
 
@@ -173,9 +174,7 @@ const TrackingOrders = () => {
                                 }
                             }
                             // console.log(item["INFOS"]["TRACKING-NUMBER"],phone,phone?.match(/(?:\+212|0)[\s-]?\d(?:[\s-]?\d){8}/)?.[0],phone?.match(/(?:\+212|0)[\s-]?\d(?:[\s-]?\d){8}/))
-
-
-
+                            
                             return <div key={index} className='w-full bg-white rounded-md p-4 border-[1px] border-orange-300 '>
                                 <table>
                                     <thead>

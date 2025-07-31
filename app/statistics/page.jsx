@@ -1,5 +1,5 @@
 "use client"
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { FaMoneyBillWave } from "react-icons/fa";
 import { FaBox } from "react-icons/fa";
 import { IoCheckbox } from "react-icons/io5";
@@ -17,12 +17,25 @@ const Statistics = () => {
 
     const {orders,user} = useUser()
 
-    console.log(orders)
+    const [total , setTotal] = useState(0)
+
+    // console.log(orders)
 
     const data = [
         { name: 'Livré', value: orders.livre },
         { name: 'Retour', value: orders.retour },
     ];
+
+
+    useEffect(()=>{
+        if(orders.livre >= 60){
+            setTotal((orders.livre-(orders.tow+orders.three+orders.four))*15+(orders.tow*2*15)+(orders.three*3*15)+(orders.four*4*15))
+        }else{
+            setTotal((orders.livre-(orders.tow+orders.three+orders.four))*10+(orders.tow*2*10)+(orders.three*3*10)+(orders.four*4*10))
+
+        }
+    },[orders.livre])
+
 
     return (
         <div>
@@ -31,7 +44,7 @@ const Statistics = () => {
             <div className='px-4 flex flex-col gap-4'>
                 <div className='bg-white w-full h-[150px] rounded-md flex items-center justify-between p-4'>
                     <div>
-                        <p className='text-[2rem]'>{user?.name == "ibtissam"? orders.livre*15 : orders.livre*10}.00 DH</p>
+                        <p className='text-[2rem]'>{total}.00 DH</p>
                         <p className='text-[13px] mt-[-10px]'>Total Income</p>
                     </div>
                     <FaMoneyBillWave className='text-[4rem]' />
@@ -59,6 +72,32 @@ const Statistics = () => {
                         <p className='text-[13px] mt-[-10px]'>Total retour</p>
                     </div>
                     <HiArchiveBoxXMark className='text-[4rem]' />
+
+                </div>
+
+                <div className='bg-white w-full h-[150px] rounded-md flex justify-between items-center  p-4'>
+
+                    <div className=''>
+                        <p className='font-semibold'>2 Orders</p>
+                        <p className='text-center'>{orders.tow}</p>
+                    </div>
+                    <div className=' '>
+                        <p className='font-semibold'>3 Orders</p>
+                        <p className='text-center'>{orders.three}</p>
+                    </div>
+                    <div className=' '>
+                        <p className='font-semibold'>4 Orders</p>
+                        <p className='text-center'>{orders.four}</p>
+                    </div>
+
+
+                    {/* <div>
+                        <p className='text-[2rem]'>{orders.retour}</p>
+                        <p className='text-[13px] mt-[-10px]'>Total retour</p>
+                    </div> */}
+                    {/* <HiArchiveBoxXMark className='text-[4rem]' /> */}
+
+
 
                 </div>
 

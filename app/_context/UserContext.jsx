@@ -31,6 +31,26 @@ export const UserProvider = ({ children }) => {
 
     useEffect(() => {
         if (user) {
+            const VerifyID = async () => {
+
+                try {
+                  const res = await axios.get(`/api/numberOrder/${user._id}`)
+            
+                  setUser(res.data)
+            
+                  console.log(res.data)
+            
+                  router.push("/TrackingOrders")
+            
+            
+                } catch (error) {
+                  console.log(error.message)
+                }
+            
+            
+              }
+
+              VerifyID()
             localStorage.setItem('user', JSON.stringify(user));
         } else {
             localStorage.removeItem('user');
@@ -51,12 +71,21 @@ export const UserProvider = ({ children }) => {
             let getOrdersList = {
                 livre: 0,
                 order: 0,
-                retour: 0
+                retour: 0,
+                one : 0,
+                tow: 0,
+                three: 0,
+                four: 0,
             }
 
             let livre= 0
             let total= 0
             let retour= 0
+
+            let one = 0
+            let tow= 0
+            let three= 0
+            let four= 0
 
 
             let min = 0
@@ -106,7 +135,26 @@ export const UserProvider = ({ children }) => {
                                 retour++
                             }
 
+                            // console.log(data["INFOS"]["PRICE"])
+
+                            if(data["INFOS"]["PRICE"] < 350){
+                                one++
+                            }
+                            if(data["INFOS"]["PRICE"] > 350 && data["INFOS"]["PRICE"]  <= 500){
+                                tow++
+                            }
+                            if(data["INFOS"]["PRICE"] >= 550 && data["INFOS"]["PRICE"] <= 750 ){
+                                three++
+                            }
+
+                            if(data["INFOS"]["PRICE"] > 750  ){
+                                four++
+                            }
+
+
                             total ++
+
+
                             
 
                         //     getOrdersList.livre = getOrdersList.livre + 1
@@ -121,7 +169,11 @@ export const UserProvider = ({ children }) => {
                     setOrders({
                         livre:livre,
                         order:total,
-                        retour:retour
+                        retour:retour,
+                        one : one,
+                        tow: tow,
+                        three: three,
+                        four: four,
                     });
 
                     // console.log(getOrdersList)

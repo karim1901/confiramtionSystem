@@ -39,8 +39,7 @@ export const UserProvider = ({ children }) => {
                   setUser(res.data)
             
                   console.log(res.data)
-            
-                  router.push("/TrackingOrders")
+        
             
             
                 } catch (error) {

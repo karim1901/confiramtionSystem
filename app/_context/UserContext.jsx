@@ -23,14 +23,7 @@ export const UserProvider = ({ children }) => {
         const storedUser = localStorage.getItem('user');
         if (storedUser) {
             setUser(JSON.parse(storedUser));
-        }
 
-
-    }, []);
-
-
-    useEffect(() => {
-        if (user) {
             const VerifyID = async () => {
 
                 try {
@@ -50,10 +43,19 @@ export const UserProvider = ({ children }) => {
               }
 
               VerifyID()
+        }
+
+
+
+    }, []);
+
+
+    useEffect(() => {
+        if (user) {
+
             localStorage.setItem('user', JSON.stringify(user));
         } else {
             localStorage.removeItem('user');
-            router.push("/")
         }
     }, [user]);
 

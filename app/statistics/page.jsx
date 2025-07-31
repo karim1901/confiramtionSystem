@@ -4,6 +4,7 @@ import { FaMoneyBillWave } from "react-icons/fa";
 import { FaBox } from "react-icons/fa";
 import { IoCheckbox } from "react-icons/io5";
 import { HiArchiveBoxXMark } from "react-icons/hi2";
+import { GrInProgress } from "react-icons/gr";
 
 import { PieChart, Pie, Cell, Tooltip, Legend } from 'recharts';
 import { useUser } from '../_context/UserContext';
@@ -29,9 +30,9 @@ const Statistics = () => {
 
     useEffect(()=>{
         if(orders.livre >= 60){
-            setTotal((orders.livre-(orders.tow+orders.three+orders.four))*15+(orders.tow*2*15)+(orders.three*3*15)+(orders.four*4*15))
+            setTotal((+(orders.livre)-(orders.tow+orders.three+orders.four))*15+(orders.tow*2*15)+(orders.three*3*15)+(orders.four*4*15))
         }else{
-            setTotal((orders.livre-(orders.tow+orders.three+orders.four))*10+(orders.tow*2*10)+(orders.three*3*10)+(orders.four*4*10))
+            setTotal((+(orders.livre)-(orders.tow+orders.three+orders.four))*10+(orders.tow*2*10)+(orders.three*3*10)+(orders.four*4*10))
 
         }
     },[orders.livre])
@@ -56,6 +57,14 @@ const Statistics = () => {
                         <p className='text-[13px] mt-[-10px]'>Total Orders</p>
                     </div>
                     <FaBox className='text-[4rem]' />
+                </div>
+
+                <div className='bg-white w-full h-[150px] rounded-md flex items-center justify-between p-4'>
+                    <div>
+                        <p className='text-[2rem]'>{orders.order-orders.livre-orders.retour }</p>
+                        <p className='text-[13px] mt-[-10px]'>Orders in Progress</p>
+                    </div>
+                    <GrInProgress className='text-[4rem]' />
                 </div>
 
                 <div className='bg-white w-full h-[150px] rounded-md flex items-center justify-between p-4'>

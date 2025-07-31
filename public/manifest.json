@@ -6,26 +6,30 @@
     "background_color": "#ffffff",
     "theme_color": "#000000",
     "icons": [
-      {
-        "src": "/icons/icon1.jpg",
-        "sizes": "192x192",
-        "type": "image/jpg"
-      },
-      {
-        "src": "/icons/icon2.jpg",
-        "sizes": "192x192",
-        "type": "image/jpg"
-      },
-      {
-        "src": "/icons/desktop1.png",
-        "sizes": "512x512",
-        "type": "image/png"
-      },
-      {
-        "src": "/icons/desktop2.png",
-        "sizes": "512x512",
-        "type": "image/png"
-      }
+        {
+            "src": "/icons/icon.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/icons/icon1.jpg",
+            "sizes": "192x192",
+            "type": "image/jpg"
+        },
+        {
+            "src": "/icons/icon2.jpg",
+            "sizes": "192x192",
+            "type": "image/jpg"
+        },
+        {
+            "src": "/icons/desktop1.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        },
+        {
+            "src": "/icons/desktop2.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
     ]
-  }
-  
+}

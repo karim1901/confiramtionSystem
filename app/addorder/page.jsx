@@ -171,7 +171,7 @@ const AddOrder = () => {
 
                 <input
                     type="text"
-                    className='w-full h-[2.2rem] pl-[1rem] rounded-sm'
+                    className='w-full h-[2.2rem] pl-[1rem] outline-none border-[1px] border-[orange] rounded-sm'
                     placeholder='Name Client'
                     value={order['parcel-receiver']}
                     onChange={(e) => setOrder({ ...order, 'parcel-receiver': e.target.value })}
@@ -180,7 +180,7 @@ const AddOrder = () => {
 
                 <input
                     type="text" 
-                    className='w-full h-[2.2rem] pl-[1rem] rounded-sm'
+                    className='w-full h-[2.2rem] pl-[1rem] outline-none border-[1px] border-[orange] rounded-sm'
                     value={order['parcel-phone']}
                     placeholder='Phone'
                     onChange={(e) => setOrder({ ...order, 'parcel-phone': e.target.value })}
@@ -211,7 +211,7 @@ const AddOrder = () => {
                 {errors["parcel-city"] && <p className="text-red-500">{errors["parcel-city"]}</p>}
 
                 <input
-                    className='w-full h-[2.2rem] pl-[1rem] rounded-sm'
+                    className='w-full h-[2.2rem] pl-[1rem] outline-none border-[1px] border-[orange] rounded-sm'
                     type="text"
                     value={order['parcel-address']}
                     placeholder='Address'
@@ -220,7 +220,7 @@ const AddOrder = () => {
                 {errors["parcel-address"] && <p className="text-red-500">{errors["parcel-address"]}</p>}
 
                 <input
-                    className='w-full h-[2.2rem] pl-[1rem] rounded-sm'
+                    className='w-full h-[2.2rem] pl-[1rem] outline-none border-[1px] border-[orange] rounded-sm'
                     type="text"
                     value={order['parcel-price']}
                     placeholder='Price'
@@ -229,7 +229,7 @@ const AddOrder = () => {
                 {errors["parcel-price"] && <p className="text-red-500">{errors["parcel-price"]}</p>}
 
                 <input
-                    className='w-full h-[2.2rem] pl-[1rem] rounded-sm' 
+                    className='w-full h-[2.2rem] pl-[1rem] outline-none border-[1px] border-[orange] rounded-sm' 
                     placeholder='Name Product'
                     type="text"
                     value={order['parcel-nature']}
@@ -237,7 +237,7 @@ const AddOrder = () => {
                 />
                 {errors["parcel-nature"] && <p className="text-red-500">{errors["parcel-nature"]}</p>}
 
-                <input type="text" className='w-full h-[2.2rem] pl-[1rem] rounded-sm hidden' placeholder='commenet' />
+                <input type="text" className='w-full h-[2.2rem] outline-none border-[1px] border-[orange] pl-[1rem] rounded-sm hidden' placeholder='commenet' />
 
 
                 <button type='button' className='text-white bg-black p-[.7rem] rounded-md'  onClick={sendOrder} >Send Order</button>

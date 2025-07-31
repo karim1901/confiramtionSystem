@@ -23,7 +23,7 @@ const NavBar = () => {
   const sideRef = useRef(null)
   const router = useRouter()
   const path = usePathname()
-  const { user } = useUser()
+  const { user ,setUser } = useUser()
 
 
   // console.log(path.split("/"))
@@ -52,6 +52,7 @@ const NavBar = () => {
 
   const logOut = ()=>{
     localStorage.removeItem('user');
+    setUser(null)
     router.push("/")
   }
 

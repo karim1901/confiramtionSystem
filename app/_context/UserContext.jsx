@@ -16,7 +16,11 @@ export const UserProvider = ({ children }) => {
     const [orders, setOrders] = useState({
         livre: 0,
         order: 0,
-        retour: 0
+        retour: 0,
+        one : 0,
+        tow: 0,
+        three: 0,
+        four: 0,
     })
 
     useEffect(() => {

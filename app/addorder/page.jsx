@@ -9,7 +9,7 @@ import toast from 'react-hot-toast';
 
 const AddOrder = () => {
 
-    const {user,setUser}= useUser()
+    const { user, setUser } = useUser()
 
     const [cities, setCities] = useState([]);
     const [selectedCities, setSelectedCities] = useState(null);
@@ -38,7 +38,7 @@ const AddOrder = () => {
             const res = await axios.get(`/api/numberOrder/${user._id}`)
 
             setUser(res.data)
-      
+
         } catch (error) {
 
             console.log("message", error.message)
@@ -84,7 +84,7 @@ const AddOrder = () => {
             formData.append("parcel-phone", order["parcel-phone"]);
             formData.append("parcel-city", order["parcel-city"]);
             formData.append("parcel-address", order["parcel-address"]);
-            formData.append("parcel-note", order["parcel-note"]);
+            formData.append("parcel-note", order['parcel-nature']);
             formData.append("parcel-price", order["parcel-price"]);
             formData.append("parcel-nature", order["parcel-nature"]);
             formData.append("tracking-number", `${user.name}${user.numberOrder}`);
@@ -179,15 +179,15 @@ const AddOrder = () => {
                 {errors["parcel-receiver"] && <p className="text-red-500">{errors["parcel-receiver"]}</p>}
 
                 <input
-                    type="text" 
+                    type="text"
                     className='w-full h-[2.2rem] pl-[1rem] outline-none border-[1px] border-[orange] rounded-sm'
                     value={order['parcel-phone']}
                     placeholder='Phone'
                     onChange={(e) => setOrder({ ...order, 'parcel-phone': e.target.value })}
-                    
-                    />
+
+                />
                 {errors["parcel-phone"] && <p className="text-red-500">{errors["parcel-phone"]}</p>}
-                
+
 
                 <Select
                     instanceId="city-select"
@@ -229,7 +229,7 @@ const AddOrder = () => {
                 {errors["parcel-price"] && <p className="text-red-500">{errors["parcel-price"]}</p>}
 
                 <input
-                    className='w-full h-[2.2rem] pl-[1rem] outline-none border-[1px] border-[orange] rounded-sm' 
+                    className='w-full h-[2.2rem] pl-[1rem] outline-none border-[1px] border-[orange] rounded-sm'
                     placeholder='Name Product'
                     type="text"
                     value={order['parcel-nature']}
@@ -237,10 +237,7 @@ const AddOrder = () => {
                 />
                 {errors["parcel-nature"] && <p className="text-red-500">{errors["parcel-nature"]}</p>}
 
-                <input type="text" className='w-full h-[2.2rem] outline-none border-[1px] border-[orange] pl-[1rem] rounded-sm hidden' placeholder='commenet' />
-
-
-                <button type='button' className='text-white bg-black p-[.7rem] rounded-md'  onClick={sendOrder} >Send Order</button>
+                <button type='button' className='text-white bg-black p-[.7rem] rounded-md' onClick={sendOrder} >Send Order</button>
             </form>
 
         </div>

@@ -131,7 +131,7 @@ const NavBar = () => {
               </li>
             </Link>
 
-            {!isVisible ? "" : <li className="flex items-center p-[1rem] bg-amber-800 w-[500px] overflow-hidden cursor-pointer " onClick={offSideLeft}>
+            {/* {!isVisible ? "" : <li className="flex items-center p-[1rem] bg-amber-800 w-[500px] overflow-hidden cursor-pointer " onClick={offSideLeft}>
               <MdInstallMobile className="text-[1.2rem]" />
               <p
                 onClick={handleInstallClick}
@@ -139,7 +139,7 @@ const NavBar = () => {
               >
                 Install App
               </p>
-            </li>}
+            </li>} */}
 
             <li className="flex items-center p-[1rem] bg-amber-800 w-[500px] overflow-hidden cursor-pointer " onClick={offSideLeft}>
               <RiLogoutBoxRLine className="text-[1.2rem]" />

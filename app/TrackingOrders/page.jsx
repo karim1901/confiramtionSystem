@@ -174,7 +174,7 @@ const TrackingOrders = () => {
                                 }
                             }
                             // console.log(item["INFOS"]["TRACKING-NUMBER"],phone,phone?.match(/(?:\+212|0)[\s-]?\d(?:[\s-]?\d){8}/)?.[0],phone?.match(/(?:\+212|0)[\s-]?\d(?:[\s-]?\d){8}/))
-                            
+
                             return <div key={index} className='w-full bg-white rounded-md p-4 border-[1px] border-orange-300 '>
                                 <table>
                                     <thead>
@@ -203,11 +203,11 @@ const TrackingOrders = () => {
                                             <td className='w-[20px] text-center'>:</td>
                                             <td>{item["INFOS"]["ADDRESS"]}</td>
                                         </tr>
-                                        {/* <tr>
+                                        <tr>
                                             <td>Name Product</td>
                                             <td className='w-[20px] text-center'>:</td>
-                                            <td>Radco Jdid</td>
-                                        </tr> */}
+                                            <td>{item["INFOS"]["NOTE"]}</td>
+                                        </tr>
                                         <tr>
                                             <td>Price </td>
                                             <td className='w-[20px] text-center'>:</td>

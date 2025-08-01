@@ -10,7 +10,7 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useUser } from "../_context/UserContext";
-
+import { MdInstallMobile } from "react-icons/md";
 
 
 
@@ -132,7 +132,7 @@ const NavBar = () => {
             </Link>
 
             {!isVisible ? "" : <li className="flex items-center p-[1rem] bg-amber-800 w-[500px] overflow-hidden cursor-pointer " onClick={offSideLeft}>
-              <RiLogoutBoxRLine className="text-[1.2rem]" />
+              <MdInstallMobile className="text-[1.2rem]" />
               <p
                 onClick={handleInstallClick}
                 className="px-[.2rem]  "

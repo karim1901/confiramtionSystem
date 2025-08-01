@@ -95,13 +95,13 @@ const TrackingOrders = () => {
           let ID = user?.numberOrder;
           let getOrdersList = [];
 
-          let min = 0
+          let min = 202508011000
 
-          if(user?.name == "ibtissam" || user?.name == "maryam" ){
-            min = 20254000
-          }else{
-            min=3000
-          }
+          // if(user?.name == "ibtissam" || user?.name == "maryam" ){
+          //   min = 20254000
+          // }else{
+          //   min=3000
+          // }
       
           while (ID >= min) {
             if (!isMounted.current) break; // ✅ توقف عند تفكيك المكون
@@ -130,7 +130,7 @@ const TrackingOrders = () => {
                 getOrdersList.push(data);
               }
 
-                // console.log("seccessfylly")
+                console.log("seccessfylly")
       
               ID--;
               setOrders([...getOrdersList]);
@@ -141,6 +141,7 @@ const TrackingOrders = () => {
         };
       
         getOrders();
+
       
         return () => {
           isMounted.current = false; // ✅ عند الخروج من المكون

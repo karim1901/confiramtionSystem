@@ -17,7 +17,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <head>
         <link rel="manifest" href="/manifest.json" />
-        <link rel="icon" type="image/svg+xml" href="/icons/icon.png" />
+        <link rel="icon" type="image/svg+xml" href="/icons/acs.png" />
       </head>
       <body className="relative" >
           <UserProvider>

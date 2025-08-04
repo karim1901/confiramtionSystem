@@ -8,6 +8,7 @@ import { MdTimer } from "react-icons/md";
 
 import { PieChart, Pie, Cell, Tooltip, Legend } from 'recharts';
 import { useUser } from '../_context/UserContext';
+import { useRouter } from 'next/navigation';
 
 
 const COLORS = ['#00C49F', '#FF8042'];
@@ -19,6 +20,9 @@ const Statistics = () => {
     const {orders,user} = useUser()
 
     const [total , setTotal] = useState(0)
+
+
+    const router = useRouter()
 
     // console.log(orders)
 
@@ -50,7 +54,7 @@ const Statistics = () => {
                     <FaMoneyBillWave className='text-[4rem]' />
                 </div>
 
-                <div className='bg-white w-full h-[150px] rounded-md flex items-center justify-between p-4'>
+                <div className='bg-white w-full h-[150px] rounded-md flex items-center justify-between p-4' onClick={()=>{router.push("/TrackingOrders")}}>
                     <div>
                         <p className='text-[2rem]'>{orders.order}</p>
                         <p className='text-[13px] mt-[-10px]'>Total Orders</p>
@@ -58,7 +62,7 @@ const Statistics = () => {
                     <FaBox className='text-[4rem]' />
                 </div>
 
-                <div className='bg-white w-full h-[150px] rounded-md flex items-center justify-between p-4'>
+                <div className='bg-white w-full h-[150px] rounded-md flex items-center justify-between p-4'  onClick={()=>{router.push("/statistics/progress")}}>
                     <div>
                         <p className='text-[2rem]'>{orders.order-orders.livre-orders.retour }</p>
                         <p className='text-[13px] mt-[-10px]'>Orders in Progress</p>
@@ -66,7 +70,7 @@ const Statistics = () => {
                     <MdTimer className='text-[4rem]' />
                 </div>
 
-                <div className='bg-white w-full h-[150px] rounded-md flex items-center justify-between p-4'>
+                <div className='bg-white w-full h-[150px] rounded-md flex items-center justify-between p-4' onClick={()=>{router.push("/statistics/livre")}}>
                     <div>
                         <p className='text-[2rem]'>{orders.livre}</p>
                         <p className='text-[13px] mt-[-10px]'>Total Livre</p>
@@ -74,7 +78,7 @@ const Statistics = () => {
                     <IoCheckbox className='text-[4rem]' />
                 </div>
 
-                <div className='bg-white w-full h-[150px] rounded-md flex items-center justify-between p-4'>
+                <div className='bg-white w-full h-[150px] rounded-md flex items-center justify-between p-4' onClick={()=>{router.push("/statistics/retour")}}>
                     <div>
                         <p className='text-[2rem]'>{orders.retour}</p>
                         <p className='text-[13px] mt-[-10px]'>Total retour</p>

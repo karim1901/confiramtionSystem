@@ -12,6 +12,11 @@ export const UserProvider = ({ children }) => {
 
     const [user, setUser] = useState(null)
     const router = useRouter()
+    const[ORDERS , setORDERS] = useState({
+        livre:[],
+        retour:[],
+        progress:[]
+    })
 
     const [orders, setOrders] = useState({
         livre: 0,
@@ -72,6 +77,12 @@ export const UserProvider = ({ children }) => {
 
         const getOrders = async () => {
             // console.log(user)
+
+            let getORDERS = {
+                livre:[],
+                retour:[],
+                progress:[]
+            }
             let ID = user?.numberOrder;
             let getOrdersList = {
                 livre: 0,
@@ -134,12 +145,19 @@ export const UserProvider = ({ children }) => {
                         // if (data["STATUT"] == "Livré") {
                             // console.log(data["STATUT"] == "Livré")
                             if(data["STATUT"] == "Livré"){
+                                getORDERS.livre.push(data)
                                 livre++
                             }
                             if(data["STATUT"] == "Annulé" || data["STATUT"] == "Retourné" || data["STATUT"] == "Refusé"){
+                                getORDERS.retour.push(data)
                                 retour++
                             }
 
+
+                            if(data["STATUT"] != "Annulé" && data["STATUT"] != "Retourné" && data["STATUT"] != "Refusé" && data["STATUT"] != "Livré"){
+                                console.log(data)
+                                getORDERS.progress.push(data)
+                            }
                             // console.log(data["INFOS"]["PRICE"])
 
                             if(data["INFOS"]["PRICE"] < 350){
@@ -158,6 +176,7 @@ export const UserProvider = ({ children }) => {
 
 
                             total ++
+
 
 
                             
@@ -180,6 +199,8 @@ export const UserProvider = ({ children }) => {
                         three: three,
                         four: four,
                     });
+                    
+                    setORDERS(getORDERS)
 
                     // console.log(getOrdersList)
 
@@ -203,7 +224,7 @@ export const UserProvider = ({ children }) => {
 
 
 
-    return <UserContext.Provider value={{ user, setUser, orders }}>
+    return <UserContext.Provider value={{ user, setUser, orders , ORDERS }}>
         {children}
     </UserContext.Provider>
 }

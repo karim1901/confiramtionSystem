@@ -95,7 +95,7 @@ const NavBar = () => {
   // if (!isVisible) return null; // لا نعرض الزر إذا غير متاح
 
   return (
-    <div className={`w-full  bg-antic   ${user == null && "hidden"} ${path.split("/")[1] == "" && "hidden"}`} >
+    <div className={`w-full fixed top-0 left-0 bg-antic   ${user == null && "hidden"} ${path.split("/")[1] == "" && "hidden"}`} >
       <div className="flex justify-between p-[1rem]  ">
         <div className="flex items-center gap-[.3rem]">
           <FaUserCheck className="" />
@@ -103,7 +103,7 @@ const NavBar = () => {
         </div>
         <IoMdMenu onClick={onSideLeft} className="text-[20px]" />
 
-        <div ref={navRef} className="w-[0] duration-300 z-[100] h-full absolute text-white bg-black top-0 overflow-hidden right-0">
+        <div ref={navRef} className="w-[0] duration-300 z-[100] h-full fixed text-white bg-black top-0 overflow-hidden right-0">
           <h1 className="px-[1rem] text-antic p-[1rem] text-center min-w-max overflow-hidden">Service Confirmation</h1>
 
           <ul className="text-antic "   >

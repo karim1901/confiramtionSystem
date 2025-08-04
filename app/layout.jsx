@@ -22,7 +22,9 @@ export default function RootLayout({ children }) {
       <body className="relative" >
           <UserProvider>
           <NavBar />
-          {children}
+          <div className="mt-[3rem]">
+            {children}
+          </div>
         <Toaster/>
 
 

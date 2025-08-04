@@ -22,7 +22,7 @@
             "type": "image/jpg"
         },
         {
-            "src": "/icons/desktop1.png",
+            "src": "/icons/desktop.png",
             "sizes": "512x512",
             "type": "image/png"
         },

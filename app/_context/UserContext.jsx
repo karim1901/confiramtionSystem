@@ -163,20 +163,54 @@ export const UserProvider = ({ children }) => {
                                 one++
                             }
                             if(data["INFOS"]["PRICE"] > 350 && data["INFOS"]["PRICE"]  <= 500){
-                                tow++
+                                let isLivre = false
+                                for (let i = 2; i < 20; i++) {
+                                    const statut = String(data[`${i}`]?.STATUT);
+                                    if (statut == "Livré") {
+                                        isLivre = true
+                                        break;
+                                    }
+                                }
+                                if(isLivre){
+                                    tow++
+                                }
                             }
                             if(data["INFOS"]["PRICE"] >= 550 && data["INFOS"]["PRICE"] <= 750 ){
-                                three++
+                                let isLivre = false
+                                for (let i = 2; i < 20; i++) {
+                                    const statut = String(data[`${i}`]?.STATUT);
+                                    if (statut == "Livré") {
+                                        isLivre = true
+                                        break;
+                                    }
+                                }
+                                if(isLivre){
+                                    three++
+                                }
+                                
                             }
 
                             if(data["INFOS"]["PRICE"] > 750  ){
-                                four++
+                                let isLivre = false
+                                for (let i = 2; i < 20; i++) {
+                                    const statut = String(data[`${i}`]?.STATUT);
+                                    if (statut == "Livré") {
+                                        isLivre = true
+                                        break;
+                                    }
+                                }
+                                if(isLivre){
+                                    four++
+                                }
+                                
                             }
 
 
                             total ++
 
                                 // console.log(data)
+
+                            
 
 
                             

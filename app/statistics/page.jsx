@@ -35,8 +35,10 @@ const Statistics = () => {
     useEffect(()=>{
         if(orders.livre >= 60){
             setTotal((+(orders.livre)-(orders.tow+orders.three+orders.four))*15+(orders.tow*2*15)+(orders.three*3*15)+(orders.four*4*15))
+            // setTotal(orders.livre*15)
         }else{
             setTotal((+(orders.livre)-(orders.tow+orders.three+orders.four))*10+(orders.tow*2*10)+(orders.three*3*10)+(orders.four*4*10))
+            // setTotal(orders.livre*10)
         }
     },[orders.livre])
 

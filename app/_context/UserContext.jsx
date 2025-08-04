@@ -104,13 +104,13 @@ export const UserProvider = ({ children }) => {
             let four= 0
 
 
-            let min = 0
+            let min = 20250801001
 
-            if(user?.name == "ibtissam" || user?.name == "maryam" ){
-              min = 20254000
-            }else{
-              min=3000
-            }
+            // if(user?.name == "ibtissam" || user?.name == "maryam" ){
+            //   min = 20254000
+            // }else{
+            //   min=3000
+            // }
         
             while (ID >= min) {
                 if (!isMounted.current) break; // ✅ توقف عند تفكيك المكون
@@ -120,13 +120,13 @@ export const UserProvider = ({ children }) => {
                     formData.append('tracking-number', `${user.name}${ID}`);
 
                     const res = await axios.post(
-                        `https://api.ozonexpress.ma/customers/49800/05109d-8ee439-0d3c48-61315f-6b77d1/tracking`,
+                        `https://api.ozonexpress.ma/customers/${user.id}/${user.secretKey}/tracking`,
                         formData
                     );
 
                     if (res.data.TRACKING.RESULT !== "ERROR") {
                         const res2 = await axios.post(
-                            `https://api.ozonexpress.ma/customers/49800/05109d-8ee439-0d3c48-61315f-6b77d1/parcel-info`,
+                            `https://api.ozonexpress.ma/customers/${user.id}/${user.secretKey}/parcel-info`,
                             formData
                         );
 
@@ -155,7 +155,6 @@ export const UserProvider = ({ children }) => {
 
 
                             if(data["STATUT"] != "Annulé" && data["STATUT"] != "Retourné" && data["STATUT"] != "Refusé" && data["STATUT"] != "Livré"){
-                                console.log(data)
                                 getORDERS.progress.push(data)
                             }
                             // console.log(data["INFOS"]["PRICE"])
@@ -177,6 +176,7 @@ export const UserProvider = ({ children }) => {
 
                             total ++
 
+                                // console.log(data)
 
 
                             

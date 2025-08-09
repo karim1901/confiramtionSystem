@@ -1,7 +1,7 @@
 {
     "name": "Service Confirmation",
     "short_name": "Service Confirmation",
-    "start_url": "/",
+    "start_url": "/sc",
     "display": "standalone",
     "background_color": "#ffffff",
     "theme_color": "#000000",

@@ -95,7 +95,7 @@ const NavBar = () => {
   // if (!isVisible) return null; // لا نعرض الزر إذا غير متاح
 
   return (
-    <div className={`w-full fixed top-0 left-0 bg-antic   ${user == null && "hidden"} ${path.split("/")[1] == "" && "hidden"}`} >
+    <div className={`w-full fixed top-0 left-0 bg-antic z-10   ${user == null && "hidden"} ${path.split("/")[1] == "" && "hidden"}`} >
       <div className="flex justify-between p-[1rem]  ">
         <div className="flex items-center gap-[.3rem]">
           <FaUserCheck className="" />
@@ -108,14 +108,14 @@ const NavBar = () => {
 
           <ul className="text-antic "   >
 
-            <Link href={"/TrackingOrders"} onClick={offSideLeft} >
+            <Link href={"/sc/TrackingOrders"} onClick={offSideLeft} >
               <li className="flex items-center p-[1rem] bg-amber-800 w-[500px] overflow-hidden">
                 <FaBoxesStacked className="text-[1.2rem]" />
                 <p className="px-[.2rem]  ">Tracking Orders</p>
               </li>
             </Link>
 
-            <Link href="/addorder" onClick={offSideLeft} >
+            <Link href="/sc/addorder" onClick={offSideLeft} >
               <li className="flex items-center p-[1rem] bg-amber-800 w-[500px] overflow-hidden">
                 <IoIosAddCircle className="text-[1.2rem]" />
                 <p className="px-[.2rem] ">Add Order</p>
@@ -124,7 +124,7 @@ const NavBar = () => {
 
 
 
-            <Link href="/statistics" onClick={offSideLeft}>
+            <Link href="/sc/statistics" onClick={offSideLeft}>
               <li className="flex items-center p-[1rem] bg-amber-800 w-[500px] overflow-hidden">
                 <RiNumbersFill className="text-[1.2rem]" />
                 <p className="px-[.2rem]  ">Statistics</p>

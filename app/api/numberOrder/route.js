@@ -15,9 +15,9 @@ export async function POST(request) {
         const data = await request.json()
         data["numberOrder"]="202508011000"
 
-        User.create(data)
+        const user = await User.create(data)
 
-        return NextResponse.json({message:"created successfully "})
+        return NextResponse.json({message:"created successfully " ,user})
         
     } catch (error) {
         return NextResponse.json({message:error.message})

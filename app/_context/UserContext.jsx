@@ -156,6 +156,7 @@ export const UserProvider = ({ children }) => {
 
                             if(data["STATUT"] != "Annulé" && data["STATUT"] != "Retourné" && data["STATUT"] != "Refusé" && data["STATUT"] != "Livré"){
                                 getORDERS.progress.push(data)
+                                progress++
                             }
                             // console.log(data["INFOS"]["PRICE"])
 
@@ -267,9 +268,9 @@ export const UserProvider = ({ children }) => {
 
 export const useUser = () => {
     const context = useContext(UserContext)
-    if (!context) {
-        throw new Error("useUser must be used within a UserProvider")
-    }
+    // if (!context) {
+    //     throw new Error("useUser must be used within a UserProvider")
+    // }
 
     return context
 

@@ -96,7 +96,7 @@ const page = () => {
                     Livreur : {phone?.match(/(?:\+212|0)[\s\-]?\d(?:[\s\-]?\d){8}/)}
                   </p>
                   <p>
-                    {(item["STATUT"] == "Annulé" || item["STATUT"] == "Retourné" || item["STATUT"] == "Refusé") && item["COMMENT"]}
+                    {/* {(item["STATUT"] == "Annulé" || item["STATUT"] == "Retourné" || item["STATUT"] == "Refusé") && item["COMMENT"]} */}
                     {(item["STATUT"] != "Mise en distribution" && item["STATUT"] != "Nouveau Colis" && item["STATUT"] != "Livré" && item["STATUT"] != "Attente De Ramassage" && item["STATUT"] != "Reçu") && item["COMMENT"]}
                   </p>
 

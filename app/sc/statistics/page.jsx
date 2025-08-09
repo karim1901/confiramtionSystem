@@ -7,8 +7,9 @@ import { HiArchiveBoxXMark } from "react-icons/hi2";
 import { MdTimer } from "react-icons/md";
 
 import { PieChart, Pie, Cell, Tooltip, Legend } from 'recharts';
-import { useUser } from '../_context/UserContext';
+
 import { useRouter } from 'next/navigation';
+import { useUser } from '@/app/_context/UserContext';
 
 
 const COLORS = ['#00C49F', '#FF8042'];
@@ -56,7 +57,7 @@ const Statistics = () => {
                     <FaMoneyBillWave className='text-[4rem]' />
                 </div>
 
-                <div className='bg-white w-full h-[150px] rounded-md flex items-center justify-between p-4' onClick={()=>{router.push("/TrackingOrders")}}>
+                <div className='bg-white w-full h-[150px] rounded-md flex items-center justify-between p-4' onClick={()=>{router.push("/sc/TrackingOrders")}}>
                     <div>
                         <p className='text-[2rem]'>{orders.order}</p>
                         <p className='text-[13px] mt-[-10px]'>Total Orders</p>
@@ -64,7 +65,7 @@ const Statistics = () => {
                     <FaBox className='text-[4rem]' />
                 </div>
 
-                <div className='bg-white w-full h-[150px] rounded-md flex items-center justify-between p-4'  onClick={()=>{router.push("/statistics/progress")}}>
+                <div className='bg-white w-full h-[150px] rounded-md flex items-center justify-between p-4'  onClick={()=>{router.push("/sc/statistics/progress")}}>
                     <div>
                         <p className='text-[2rem]'>{orders.order-orders.livre-orders.retour }</p>
                         <p className='text-[13px] mt-[-10px]'>Orders in Progress</p>
@@ -72,7 +73,7 @@ const Statistics = () => {
                     <MdTimer className='text-[4rem]' />
                 </div>
 
-                <div className='bg-white w-full h-[150px] rounded-md flex items-center justify-between p-4' onClick={()=>{router.push("/statistics/livre")}}>
+                <div className='bg-white w-full h-[150px] rounded-md flex items-center justify-between p-4' onClick={()=>{router.push("/sc/statistics/livre")}}>
                     <div>
                         <p className='text-[2rem]'>{orders.livre}</p>
                         <p className='text-[13px] mt-[-10px]'>Total Livre</p>
@@ -80,7 +81,7 @@ const Statistics = () => {
                     <IoCheckbox className='text-[4rem]' />
                 </div>
 
-                <div className='bg-white w-full h-[150px] rounded-md flex items-center justify-between p-4' onClick={()=>{router.push("/statistics/retour")}}>
+                <div className='bg-white w-full h-[150px] rounded-md flex items-center justify-between p-4' onClick={()=>{router.push("/sc/statistics/retour")}}>
                     <div>
                         <p className='text-[2rem]'>{orders.retour}</p>
                         <p className='text-[13px] mt-[-10px]'>Total retour</p>

@@ -20,15 +20,10 @@ export default function RootLayout({ children }) {
         <link rel="icon" type="image/svg+xml" href="/icons/acs.png" />
       </head>
       <body className="relative" >
-          <UserProvider>
-          <NavBar />
-          <div className="mt-[3rem]">
-            {children}
-          </div>
+          {children}
+          
         <Toaster/>
 
-
-        </UserProvider>
       </body>
     </html>
   );

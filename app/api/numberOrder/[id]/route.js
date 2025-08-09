@@ -9,10 +9,10 @@ connectDB()
 
 export async function GET(request, { params }) {
   try {
-    
+
     const { id } = params
 
-    const num = await User.findById({_id:id})
+    const num = await User.findById({ _id: id })
 
     return NextResponse.json(num);
   } catch (error) {
@@ -24,17 +24,39 @@ export async function GET(request, { params }) {
 
 
 export async function PUT(request, { params }) {
-    try {
-      const { id } = params
+  try {
+    const { id } = params
 
-      const data = await request.json()
-      
-  
-      await User.updateOne({_id:id},{numberOrder:data.numberOrder})
-  
-      return NextResponse.json("successfly");
+    const data = await request.json()
 
-    } catch (error) {
-      return NextResponse.json({ message: error.message });
-    }
+
+    await User.updateOne({ _id: id }, { numberOrder: data.numberOrder })
+
+    return NextResponse.json("successfly");
+
+  } catch (error) {
+    return NextResponse.json({ message: error.message });
   }
+}
+
+
+
+// export const PUT = async (request, { params }) => {
+
+//   try {
+//     // const verificationResult = await verifyToken(request);
+//     // if (verificationResult instanceof NextResponse) {
+//     //   return verificationResult; // This is an error response
+//     // }
+
+//     const body = await request.json()
+
+//     console.log(body)
+//     const user = await User.updateMany({store:body.storeName},{seller:body.seller})
+//     return NextResponse.json({ message: "update successfully ", user })
+
+//   } catch (error) {
+//     return NextResponse.json({ message: error.message })
+//   }
+
+// } 

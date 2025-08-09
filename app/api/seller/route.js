@@ -1,5 +1,6 @@
 import Seller from "@/models/seller";
 import { connectDB } from "@/utils/connectDB";
+import { NextResponse } from "next/server";
 
 connectDB()
 

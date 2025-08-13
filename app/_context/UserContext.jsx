@@ -95,6 +95,7 @@ export const UserProvider = ({ children }) => {
             }
 
             let livre= 0
+            let progress= 0
             let total= 0
             let retour= 0
 

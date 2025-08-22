@@ -135,9 +135,25 @@ const AddOrder = () => {
     const getCities = async () => {
         try {
             const res = await axios.get("https://api.ozonexpress.ma/cities");
-            const cityOptions = Object.keys(res.data.CITIES).map((key) => ({
-                value: res.data.CITIES[key].ID,
-                label: res.data.CITIES[key].NAME
+            // const  data = JSON.parse(res.data)
+            const  dataSt = res.data
+
+            function fixJsonString(str) {
+                return  str.replace(/}\s*{/g, ",");
+              }
+
+            const dataSS =  fixJsonString(dataSt)
+
+
+            // console.log(data)
+
+            const data = JSON.parse(dataSS)
+
+            
+            console.log(data)
+            const cityOptions = Object.keys(data.CITIES).map((key) => ({
+                value: data.CITIES[key].ID,
+                label: data.CITIES[key].NAME
             }));
             setCities(cityOptions);
         } catch (error) {

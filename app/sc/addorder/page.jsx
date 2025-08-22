@@ -161,10 +161,6 @@ const AddOrder = () => {
         }
     };
 
-    useEffect(() => {
-        getCities();
-    }, []);
-
 
     const handleCityChange = (selectedOption) => {
 

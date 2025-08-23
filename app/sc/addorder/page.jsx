@@ -97,11 +97,17 @@ const AddOrder = () => {
                 { headers: { "Content-Type": "multipart/form-data" } }
             );
 
-            console.log("Order sent successfully:", response.data);
+
+            function fixJsonString(str) {
+                return "[" + str.replace(/}\s*{/g, "},{") + "]";
+            }
+
+            const data = JSON.parse(fixJsonString(response.data))[0]
+            console.log("Order sent successfully:", data);
 
 
 
-            if (response.data["ADD-PARCEL"].CUSTOMER.RESULT == "ERROR" || response.data["ADD-PARCEL"].RESULT == "ERROR" || response.data["CHECK_API"].RESULT == "ERROR") {
+            if ( data["ADD-PARCEL"].RESULT == "ERROR" ) {
                 toast.error("error created field .")
             } else {
                 console.log("Ssssss")
@@ -135,22 +141,15 @@ const AddOrder = () => {
     const getCities = async () => {
         try {
             const res = await axios.get("https://api.ozonexpress.ma/cities");
-            // const  data = JSON.parse(res.data)
-            const  dataSt = res.data
 
             function fixJsonString(str) {
-                return  str.replace(/}\s*{/g, ",");
-              }
+                return str.replace(/}\s*{/g, ",");
+            }
 
-            const dataSS =  fixJsonString(dataSt)
-
+            const data = JSON.parse(fixJsonString(res.data))
 
             // console.log(data)
 
-            const data = JSON.parse(dataSS)
-
-            
-            console.log(data)
             const cityOptions = Object.keys(data.CITIES).map((key) => ({
                 value: data.CITIES[key].ID,
                 label: data.CITIES[key].NAME
@@ -160,6 +159,10 @@ const AddOrder = () => {
             console.log(error.message);
         }
     };
+
+    useEffect(() => {
+        getCities();
+    }, []);
 
 
     const handleCityChange = (selectedOption) => {
@@ -171,7 +174,10 @@ const AddOrder = () => {
             'parcel-city': selectedOption?.value || ""
         });
 
-    };
+    }
+
+
+
 
 
     return (

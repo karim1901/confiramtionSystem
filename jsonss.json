@@ -1,0 +1,45 @@
+{
+    "ADD-PARCEL": {
+        "CUSTOMER": {
+            "RESULT": "SUCCESS",
+            "MESSAGE": "Valid Customer"
+        },
+        "RESULT": "SUCCESS",
+        "MESSAGE": "New Parcel Added",
+        "NEW-PARCEL": {
+            "TRACKING-NUMBER": "Fatimzahra202508011078",
+            "RECEIVER": "OUSSAMA kairm1901 KARIM",
+            "PHONE": "0681109073",
+            "CITY_ID": 37,
+            "ADDRESS": "ggggggggggggg",
+            "PRICE": 88,
+            "NOTE": "nnn",
+            "DELIVERED-PRICE": 35,
+            "RETURNED-PRICE": 0,
+            "REFUSED-PRICE": 10
+        }
+    }
+}
+
+{
+    "ADD-PARCEL": {
+        "CUSTOMER": {
+            "RESULT": "SUCCESS",
+            "MESSAGE": "Valid Customer"
+        },
+        "RESULT": "SUCCESS",
+        "MESSAGE": "New Parcel Added",
+        "NEW-PARCEL": {
+            "TRACKING-NUMBER": "Fatimzahra202508011078",
+            "RECEIVER": "OUSSAMA kairm1901 KARIM",
+            "PHONE": "0681109073",
+            "CITY_ID": 37,
+            "ADDRESS": "ggggggggggggg",
+            "PRICE": 88,
+            "NOTE": "nnn",
+            "DELIVERED-PRICE": 35,
+            "RETURNED-PRICE": 0,
+            "REFUSED-PRICE": 10
+        }
+    }
+}

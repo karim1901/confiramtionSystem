@@ -146,13 +146,14 @@ const AddOrder = () => {
                 return str.replace(/}\s*{/g, ",");
             }
 
-            const data = JSON.parse(fixJsonString(res.data))
+            const data = res.data["CITIES"]
+            // const data = JSON.parse(res.data)
 
             // console.log(data)
 
-            const cityOptions = Object.keys(data.CITIES).map((key) => ({
-                value: data.CITIES[key].ID,
-                label: data.CITIES[key].NAME
+            const cityOptions = Object.keys(data).map((key) => ({
+                value: data[key].ID,
+                label: data[key].NAME
             }));
             setCities(cityOptions);
         } catch (error) {

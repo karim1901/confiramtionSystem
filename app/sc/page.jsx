@@ -62,7 +62,7 @@ export default function Home() {
 
         <button onClick={VerifyID} className="p-[.5rem] mt-4 rounded-md bg-black text-white w-full ">Go to Account</button>
 
-        <p className="flex justify-center mt-4 text-blue-400 ">Seller</p>
+        <p className="flex justify-center mt-4 text-blue-400 " onClick={()=>{router.push("/seller")}} >Seller</p>
 
       </div>
     </div>

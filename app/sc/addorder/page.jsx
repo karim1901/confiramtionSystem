@@ -33,7 +33,7 @@ const AddOrder = () => {
     const incNum = async () => {
         try {
             const numTrac = await axios.put(`/api/numberOrder/${user._id}`, { numberOrder: +user.numberOrder + 1 })
-            console.log("inc Seccessfully")
+            console.log("inc Seccessfully" ,numTrac )
             ////////////////
             const res = await axios.get(`/api/numberOrder/${user._id}`)
 
@@ -98,19 +98,19 @@ const AddOrder = () => {
             );
 
 
-            function fixJsonString(str) {
-                return "[" + str.replace(/}\s*{/g, "},{") + "]";
-            }
+            // function fixJsonString(str) {
+            //     return "[" + str.replace(/}\s*{/g, "},{") + "]";
+            // }
 
-            const data = JSON.parse(fixJsonString(response.data))[0]
-            console.log("Order sent successfully:", data);
+            const data = response.data
+            console.log("Order sent successfully:",data["ADD-PARCEL"], data["ADD-PARCEL"].RESULT);
 
 
 
             if ( data["ADD-PARCEL"].RESULT == "ERROR" ) {
                 toast.error("error created field .")
             } else {
-                console.log("Ssssss")
+
                 toast.success("complet order seccessfully .")
             }
             setOrder({

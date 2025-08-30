@@ -32,7 +32,7 @@ export async function PUT(request, { params }) {
     console.log(id,data)
 
 
-    await User.updateOne({ _id: id }, { seller: data.seller })
+    await User.updateOne({ _id: id }, { numberOrder: data.numberOrder })
 
     return NextResponse.json("successfly");
 

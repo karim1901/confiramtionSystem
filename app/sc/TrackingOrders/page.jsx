@@ -180,7 +180,7 @@ const TrackingOrders = () => {
             user: user?._id,
             month:target?.value
         }
-        const res = await axios.get("http://localhost:3000/api/date/",{ params: infoMonth });
+        const res = await axios.get("/api/date/",{ params: infoMonth });
 
         console.log(res.data)
 

@@ -7,20 +7,21 @@ import { useUser } from '../../_context/UserContext'
 const TrackingOrders = () => {
 
 
-    const {user} = useUser()
+    const { user } = useUser()
 
-    const [search,setSearch] = useState("")
+    const [search, setSearch] = useState("")
 
     const [orders, setOrders] = useState([])
     const [Load, setLoad] = useState(false)
     const [info, setInfo] = useState({ name: "" })
+    const [date, setDate] = useState(0)
+    const [ID, setID] = useState(0)
+    const [month ,setMonth] = useState(0)
 
-
-    
 
 
     // const getOrders = async (isMounted) => {
-        
+
 
     //     var ID = user.numberOrder
     //     var getOrders = []
@@ -88,83 +89,136 @@ const TrackingOrders = () => {
 
 
     useEffect(() => {
+        console.log(ID)
+        setDate(new Date(user?.createdAt).getMonth() + 1)
+
+
+
         const isMounted = { current: true }; // ✅ مرجعية
-      
+
         const getOrders = async () => {
             // console.log(user)
-          let ID = user?.numberOrder;
-          let getOrdersList = [];
-
-          let min = 202508011000
-
-          // if(user?.name == "ibtissam" || user?.name == "maryam" ){
-          //   min = 20254000
-          // }else{
-          //   min=3000
-          // }
-      
-          while (ID >= min) {
-            if (!isMounted.current) break; // ✅ توقف عند تفكيك المكون
-      
-            try {
-              const formData = new FormData();
-              formData.append('tracking-number', `${user.name}${ID}`);
-      
-              const res = await axios.post(
-                `https://api.ozonexpress.ma/customers/${user.id}/${user.secretKey}/tracking`,
-                formData
-              );
-      
-              if (res.data.TRACKING.RESULT !== "ERROR") {
-                const res2 = await axios.post(
-                  `https://api.ozonexpress.ma/customers/${user.id}/${user.secretKey}/parcel-info`,
-                  formData
-                );
-      
-                const data = {
-                  ...res.data.TRACKING.LAST_TRACKING,
-                  ...res.data.TRACKING.HISTORY,
-                  ...res2.data["PARCEL-INFO"],
-                };
-      
-                getOrdersList.push(data);
-              }
-
-                console.log("seccessfylly")
-
-                // console.log(getOrdersList)
+            console.log(ID)
+            let getOrdersList = [];
+            let min = 0
+            let id = 0
 
 
-      
-              ID--;
-              setOrders([...getOrdersList]);
-            } catch (error) {
-              console.log("Error:", error.message);
+            if(ID == 0){
+                id =user?.numberOrder
+            }else{
+                id = ID
             }
-          }
+            
+
+            if(ID == 0){
+                 min = parseInt("20250"+user?.numberOrder[5]+"011000")
+            }else{
+                 min = parseInt("20250"+month+"011000")
+            }
+
+            console.log(min)
+
+            // if(user?.name == "ibtissam" || user?.name == "maryam" ){
+            //   min = 20254000
+            // }else{
+            //   min=3000
+            // }
+
+            while (id >= min) {
+                if (!isMounted.current) break; // ✅ توقف عند تفكيك المكون
+
+                try {
+                    const formData = new FormData();
+                    formData.append('tracking-number', `${user.name}${id}`);
+
+                    const res = await axios.post(
+                        `https://api.ozonexpress.ma/customers/${user.id}/${user.secretKey}/tracking`,
+                        formData
+                    );
+
+                    if (res.data.TRACKING.RESULT !== "ERROR") {
+                        const res2 = await axios.post(
+                            `https://api.ozonexpress.ma/customers/${user.id}/${user.secretKey}/parcel-info`,
+                            formData
+                        );
+
+                        const data = {
+                            ...res.data.TRACKING.LAST_TRACKING,
+                            ...res.data.TRACKING.HISTORY,
+                            ...res2.data["PARCEL-INFO"],
+                        };
+
+                        getOrdersList.push(data);
+                    }
+
+                    // console.log("seccessfylly")
+
+                    // console.log(getOrdersList)
+
+
+
+                    id--;
+                    setOrders([...getOrdersList]);
+                } catch (error) {
+                    console.log("Error:", error.message);
+                }
+            }
         };
-      
+
         getOrders();
 
-      
+
         return () => {
-          isMounted.current = false; // ✅ عند الخروج من المكون
+            isMounted.current = false; // ✅ عند الخروج من المكون
         };
-      }, [user]);
-      
+    }, [user,ID]);
+
+
+    const chnageDate = async ({ target }) => {
+        const infoMonth = {
+            user: user?._id,
+            month:target?.value
+        }
+        const res = await axios.get("http://localhost:3000/api/date/",{ params: infoMonth });
+
+        console.log(res.data)
+
+        const numIDd = `20250${target?.value}011`+res?.data[0]?.numberOrder
+        // console.log(numIDd)
+        setMonth(res?.data[0]?.month)
+        setID(parseInt(numIDd))
+
+    }
 
 
     return (
         <div className=''>
-            <h1 className='p-[1rem]'>Tracking Orders</h1>
+            <div className="flex justify-between p-[1rem] pt-[5rem] items-center">
+                <h1>Tracking Orders</h1>
 
+                <select className="max-h-max p-1" onChange={chnageDate}>
+                    {(() => {
+                        const options = [];
+                        // القيمة النهائية لي بغيتي توصل ليها
+                        for (let i = user?.numberOrder[5]; i >= date; i--) {
+                            options.push(
+                                <option key={i} value={i}>
+                                    {i}/2025
+                                </option>
+                            );
+                        }
+                        return options;
+                    })()}
+                </select>
+            </div>
 
             <div className='p-4  '>
-                <input type="text" onChange={({target})=>{setSearch(target.value) }} value={search} placeholder='Search by Number Phone ' className='mb-4 w-full text-[14px] h-[2rem] rounded-md pl-4 outline-none border-[1px] border-orange-300' />
+                <input type="text" onChange={({ target }) => { setSearch(target.value) }} value={search} placeholder='Search by Number Phone ' className='mb-4 w-full text-[14px] h-[2rem] rounded-md pl-4 outline-none border-[1px] border-orange-300' />
 
                 <div className='flex flex-col gap-4'>
                     {
-                        orders.filter( item =>item["INFOS"]?.["PHONE"].includes(search)).map((item, index) => {
+                        orders.filter(item => item["INFOS"]?.["PHONE"].includes(search)).map((item, index) => {
 
                             let phone = "";
 
@@ -172,7 +226,7 @@ const TrackingOrders = () => {
                                 const statut = String(item[`${i}`]?.STATUT);
                                 if (statut === "Mise en distribution" || statut === "Programmé") {
                                     // console.log(item["INFOS"]["TRACKING-NUMBER"] ,"OK")
-                                    const comment = item[`${i}`]["COMMENT"] ;
+                                    const comment = item[`${i}`]["COMMENT"];
                                     const match = comment.match(/(?:\bTéléphone[: ]*<\/?b>?\s*|\bTéléphone[: ]*)?(?:\+212|0)[\d\s\-]{8,}/i);
                                     phone = match ? match[0].replace(/[^+\d]/g, '') : "";
                                     break;
@@ -243,7 +297,7 @@ const TrackingOrders = () => {
                                     </p>
                                     <p>
                                         {/* {(item["STATUT"] == "Annulé" || item["STATUT"] == "Retourné" || item["STATUT"] == "Refusé" ) && item["COMMENT"]} */}
-                                        {(item["STATUT"] != "Mise en distribution" && item["STATUT"] != "Nouveau Colis" && item["STATUT"] != "Livré" && item["STATUT"]!="Attente De Ramassage" && item["STATUT"]!="Reçu") && item["COMMENT"]}
+                                        {(item["STATUT"] != "Mise en distribution" && item["STATUT"] != "Nouveau Colis" && item["STATUT"] != "Livré" && item["STATUT"] != "Attente De Ramassage" && item["STATUT"] != "Reçu") && item["COMMENT"]}
                                     </p>
 
                                 </div>

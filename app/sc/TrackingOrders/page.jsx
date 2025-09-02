@@ -7,7 +7,7 @@ import { useUser } from '../../_context/UserContext'
 const TrackingOrders = () => {
 
 
-    const { user } = useUser()
+    const { user, setUser } = useUser()
 
     const [search, setSearch] = useState("")
 
@@ -16,8 +16,8 @@ const TrackingOrders = () => {
     const [info, setInfo] = useState({ name: "" })
     const [date, setDate] = useState(0)
     const [ID, setID] = useState(0)
-    const [month ,setMonth] = useState(0)
-
+    const [month, setMonth] = useState(0)
+    const [USER, setUSER] = useState(null)
 
 
     // const getOrders = async (isMounted) => {
@@ -88,36 +88,46 @@ const TrackingOrders = () => {
     // }
 
 
+    // useEffect(()=>{
+
+    // },[user])
+
+
+
     useEffect(() => {
-        console.log(ID)
+
         setDate(new Date(user?.createdAt).getMonth() + 1)
 
+        // setUSER(localStorage.getItem('user'))
 
+        const storedUser = localStorage.getItem("user");
+
+        if (storedUser) {
+            const userObj = JSON.parse(storedUser);
+            setUSER(userObj)
+        }
 
         const isMounted = { current: true }; // ✅ مرجعية
 
         const getOrders = async () => {
             // console.log(user)
-            console.log(ID)
+            // console.log(ID)
             let getOrdersList = [];
             let min = 0
             let id = 0
 
 
-            if(ID == 0){
-                id =user?.numberOrder
-            }else{
-                id = ID
-            }
-            
+            id = user?.numberOrder
 
-            if(ID == 0){
-                 min = parseInt("20250"+user?.numberOrder[5]+"011000")
-            }else{
-                 min = parseInt("20250"+month+"011000")
+
+
+            if (ID == 0) {
+                min = parseInt("20250" + user?.numberOrder[5] + "011000")
+            } else {
+                min = parseInt("20250" + month + "011000")
             }
 
-            console.log(min)
+            // console.log(min)
 
             // if(user?.name == "ibtissam" || user?.name == "maryam" ){
             //   min = 20254000
@@ -172,22 +182,42 @@ const TrackingOrders = () => {
         return () => {
             isMounted.current = false; // ✅ عند الخروج من المكون
         };
-    }, [user,ID]);
+
+    }, [user, ID]);
 
 
     const chnageDate = async ({ target }) => {
-        const infoMonth = {
-            user: user?._id,
-            month:target?.value
+        const today = new Date();
+        const thisMonth = today.getMonth() + 1
+        if (target?.value == thisMonth) {
+            console.log(USER?.numberOrder)
+            setUser({ ...user, numberOrder: USER?.numberOrder })
+
+
+        } else {
+
+            const infoMonth = {
+                user: user?._id,
+                month: target?.value
+            }
+            const res = await axios.get("/api/date/", { params: infoMonth });
+            
+            let numIDd
+            const n = res?.data[0]?.numberOrder
+
+
+            if(String(n).length == 3){
+                numIDd = `20250${target?.value}011` + res?.data[0]?.numberOrder
+            }if(String(n).length == 2){
+                numIDd = `20250${target?.value}0110` + res?.data[0]?.numberOrder
+            }if(String(n).length == 1){
+                numIDd = `20250${target?.value}01100` + res?.data[0]?.numberOrder
+            }
+            // console.log(numIDd)
+            setMonth(res?.data[0]?.month)
+            setID(parseInt(numIDd))
+            setUser({ ...user, numberOrder: numIDd })
         }
-        const res = await axios.get("/api/date/",{ params: infoMonth });
-
-        console.log(res.data)
-
-        const numIDd = `20250${target?.value}011`+res?.data[0]?.numberOrder
-        // console.log(numIDd)
-        setMonth(res?.data[0]?.month)
-        setID(parseInt(numIDd))
 
     }
 
@@ -200,8 +230,10 @@ const TrackingOrders = () => {
                 <select className="max-h-max p-1" onChange={chnageDate}>
                     {(() => {
                         const options = [];
+                        const today = new Date();
+                        const thisMonth = today.getMonth() + 1
                         // القيمة النهائية لي بغيتي توصل ليها
-                        for (let i = user?.numberOrder[5]; i >= date; i--) {
+                        for (let i = thisMonth; i >= date; i--) {
                             options.push(
                                 <option key={i} value={i}>
                                     {i}/2025

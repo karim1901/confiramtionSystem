@@ -59,9 +59,9 @@ const Page = () => {
       });
 
       console.log(data)
-    setSeller(data.user)
+      setSeller(data.user)
   
-    //   alert("Login successful!");
+      // alert("Login successful!");
       localStorage.setItem("token", JSON.stringify(data.token));
       router.push("/seller/dashboard");
     } catch (error) {

@@ -117,6 +117,7 @@ export const SellerProvider = ({ children }) => {
   const verifyToken = (token) => {
     axios.post('/api/verifyToken', { token: token }).then(res => {
       setSeller(res.data.user)
+      router.push("/seller/dashboard")
     }).catch((error) => {
       console.log(error.message)
       router.push("/seller")

@@ -5,9 +5,15 @@ export function middleware(req) {
   const { pathname } = req.nextUrl;
 
   // ❌ لو لا يوجد توكن ويحاول دخول /seller/Dashboard → redirect
-  if (!token && pathname.startsWith('/seller/dashboard')) {
-    return NextResponse.redirect(new URL('/seller', req.url));
-  }
+
+
+  // console.log(pathname.startsWith('/seller/dashboard'))
+
+  // if (pathname.startsWith('/seller/dashboard')) {
+  //   if(!token){
+  //     return NextResponse.redirect(new URL('/seller', req.url))
+  //   }
+  // }
 
 //   // ✅ لو يوجد توكن ويحاول دخول /seller → redirect مباشرة للـ Dashboard
 //   if (token && pathname === '/seller') {

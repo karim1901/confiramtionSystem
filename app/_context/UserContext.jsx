@@ -137,6 +137,28 @@ export const UserProvider = ({ children }) => {
                             ...res2.data["PARCEL-INFO"],
                         };
 
+                        if(data["INFOS"]["PHONE"]=="0705079144"){
+                            console.log(data)
+                        }
+
+
+                        for (let i = 2; i < 20; i++) {
+                            const statut = String(data[`${i}`]?.STATUT);
+                            if (statut === "Retourné") {
+                                data["STATUT"] = "Retourné"
+                                break;
+                            }
+                        }
+
+                        for (let i = 2; i < 20; i++) {
+                            const statut = String(data[`${i}`]?.STATUT);
+                            if (statut === "Livré") {
+                                data["STATUT"] = "Livré"
+                                break;
+                            }
+                        }
+
+
                         // getOrdersList={
                         //     livre:getOrdersList.livre,
                         //     order:getOrdersList.order,

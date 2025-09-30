@@ -266,6 +266,14 @@ const TrackingOrders = () => {
                             }
 
                             for (let i = 2; i < 20; i++) {
+                                const statut = String(data[`${i}`]?.STATUT);
+                                if (statut === "Retourné") {
+                                    data["STATUT"] = "Retourné"
+                                    break;
+                                }
+                            }
+
+                            for (let i = 2; i < 20; i++) {
                                 const statut = String(item[`${i}`]?.STATUT);
                                 if (statut === "Livré") {
                                     item["STATUT"] = "Livré"

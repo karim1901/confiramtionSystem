@@ -127,15 +127,9 @@ const TrackingOrders = () => {
                 min = parseInt("20250" + month + "011000")
             }
 
+            while (id >= min) {
             // console.log(min)
 
-            // if(user?.name == "ibtissam" || user?.name == "maryam" ){
-            //   min = 20254000
-            // }else{
-            //   min=3000
-            // }
-
-            while (id >= min) {
                 if (!isMounted.current) break; // ✅ توقف عند تفكيك المكون
 
                 try {
@@ -159,6 +153,10 @@ const TrackingOrders = () => {
                             ...res2.data["PARCEL-INFO"],
                         };
 
+                        if(data["INFOS"]["PHONE"] == "0658195725"){
+                            console.log(data)
+                        }
+
                         getOrdersList.push(data);
                     }
 
@@ -178,10 +176,12 @@ const TrackingOrders = () => {
 
         getOrders();
 
-
         return () => {
             isMounted.current = false; // ✅ عند الخروج من المكون
         };
+
+
+        
 
     }, [user, ID]);
 
@@ -264,6 +264,17 @@ const TrackingOrders = () => {
                                     break;
                                 }
                             }
+
+                            for (let i = 2; i < 20; i++) {
+                                const statut = String(item[`${i}`]?.STATUT);
+                                if (statut === "Livré") {
+                                    item["STATUT"] = "Livré"
+                                    break;
+                                }
+                            }
+
+
+
                             // console.log(item["INFOS"]["TRACKING-NUMBER"],phone,phone?.match(/(?:\+212|0)[\s-]?\d(?:[\s-]?\d){8}/)?.[0],phone?.match(/(?:\+212|0)[\s-]?\d(?:[\s-]?\d){8}/))
 
                             return <div key={index} className='w-full bg-white rounded-md p-4 border-[1px] border-orange-300 '>

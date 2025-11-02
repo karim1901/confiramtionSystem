@@ -120,12 +120,21 @@ const TrackingOrders = () => {
             id = user?.numberOrder
 
 
-
+            
             if (ID == 0) {
+                
                 min = parseInt("20250" + user?.numberOrder[5] + "011000")
             } else {
-                min = parseInt("20250" + month + "011000")
+                console.log("month :" , month ,String(month).length)
+                if(String(month).length == 2){
+                    min = parseInt("2025" + month + "011000")
+                }else{
+                    min = parseInt("20250" + month + "011000")
+                }
             }
+            
+
+            console.log("min :" ,min )
 
             while (id >= min) {
             // console.log(min)
@@ -187,6 +196,8 @@ const TrackingOrders = () => {
 
 
     const chnageDate = async ({ target }) => {
+
+        console.log(target.value)
         const today = new Date();
         const thisMonth = today.getMonth() + 1
         if (target?.value == thisMonth) {
@@ -200,20 +211,39 @@ const TrackingOrders = () => {
                 user: user?._id,
                 month: target?.value
             }
+
+            console.log(infoMonth)
+
             const res = await axios.get("/api/date/", { params: infoMonth });
             
+            console.log(res)
+
             let numIDd
             const n = res?.data[0]?.numberOrder
 
+            console.log(n)
 
             if(String(n).length == 3){
-                numIDd = `20250${target?.value}011` + res?.data[0]?.numberOrder
+                if(String(target?.value).length == 2 ){
+                    numIDd = `2025${target?.value}011` + res?.data[0]?.numberOrder
+                }else{
+                    numIDd = `20250${target?.value}011` + res?.data[0]?.numberOrder
+                }
             }if(String(n).length == 2){
-                numIDd = `20250${target?.value}0110` + res?.data[0]?.numberOrder
+                if(String(target?.value).length == 2 ){
+                    numIDd = `2025${target?.value}0110` + res?.data[0]?.numberOrder
+                }else{
+                    numIDd = `20250${target?.value}0110` + res?.data[0]?.numberOrder
+                }
             }if(String(n).length == 1){
-                numIDd = `20250${target?.value}01100` + res?.data[0]?.numberOrder
+                if(String(target?.value).length == 2 ){
+                    numIDd = `2025${target?.value}01100` + res?.data[0]?.numberOrder
+                }else{
+                    numIDd = `20250${target?.value}01100` + res?.data[0]?.numberOrder
+                }
+
             }
-            // console.log(numIDd)
+            console.log(numIDd)
             setMonth(res?.data[0]?.month)
             setID(parseInt(numIDd))
             setUser({ ...user, numberOrder: numIDd })
@@ -323,9 +353,6 @@ const TrackingOrders = () => {
                                             <td className='w-[20px] text-center'>:</td>
                                             <td>{item["INFOS"]["PRICE"]} DH</td>
                                         </tr>
-
-
-
                                     </thead>
                                 </table>
 

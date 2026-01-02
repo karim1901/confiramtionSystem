@@ -120,24 +120,25 @@ const TrackingOrders = () => {
             id = user?.numberOrder
 
 
-            
+            console.log("ID", ID)
+
             if (ID == 0) {
-                
+
                 min = parseInt("20250" + user?.numberOrder[5] + "011000")
             } else {
-                console.log("month :" , month ,String(month).length)
-                if(String(month).length == 2){
+                console.log("month :", month, String(month).length)
+                if (String(month).length == 2) {
                     min = parseInt("2025" + month + "011000")
-                }else{
+                } else {
                     min = parseInt("20250" + month + "011000")
                 }
             }
-            
 
-            console.log("min :" ,min )
+
+            console.log("min :", min)
 
             while (id >= min) {
-            // console.log(min)
+                // console.log(min)
 
                 if (!isMounted.current) break; // ✅ توقف عند تفكيك المكون
 
@@ -162,7 +163,7 @@ const TrackingOrders = () => {
                             ...res2.data["PARCEL-INFO"],
                         };
 
-                        if(data["INFOS"]["PHONE"] == "0658195725"){
+                        if (data["INFOS"]["PHONE"] == "0658195725") {
                             console.log(data)
                         }
 
@@ -190,60 +191,71 @@ const TrackingOrders = () => {
         };
 
 
-        
+
 
     }, [user, ID]);
 
 
     const chnageDate = async ({ target }) => {
 
-        console.log(target.value)
+        // console.log(target.value[1])
+        // target.value = target.value.split("/")
+        const value = target.value.split("/")
+        console.log(value)
         const today = new Date();
         const thisMonth = today.getMonth() + 1
-        if (target?.value == thisMonth) {
+        if (value[1] == thisMonth) {
             console.log(USER?.numberOrder)
             setUser({ ...user, numberOrder: USER?.numberOrder })
-
-
         } else {
 
+            console.log("value", value[1])
+            console.log("value", value[0])
+            console.log("value", target)
             const infoMonth = {
                 user: user?._id,
-                month: target?.value
+                month: value[1]
             }
 
-            console.log(infoMonth)
+            console.log("infom", infoMonth)
 
             const res = await axios.get("/api/date/", { params: infoMonth });
-            
+
             console.log(res)
 
             let numIDd
             const n = res?.data[0]?.numberOrder
 
-            console.log(n)
+            console.log("n",n)
 
-            if(String(n).length == 3){
-                if(String(target?.value).length == 2 ){
-                    numIDd = `2025${target?.value}011` + res?.data[0]?.numberOrder
-                }else{
-                    numIDd = `20250${target?.value}011` + res?.data[0]?.numberOrder
-                }
-            }if(String(n).length == 2){
-                if(String(target?.value).length == 2 ){
-                    numIDd = `2025${target?.value}0110` + res?.data[0]?.numberOrder
-                }else{
-                    numIDd = `20250${target?.value}0110` + res?.data[0]?.numberOrder
-                }
-            }if(String(n).length == 1){
-                if(String(target?.value).length == 2 ){
-                    numIDd = `2025${target?.value}01100` + res?.data[0]?.numberOrder
-                }else{
-                    numIDd = `20250${target?.value}01100` + res?.data[0]?.numberOrder
-                }
+            if (res.length==0) {
+                // numIDd = `${value[0]}${value[1]}011` + res?.data[0]?.numberOrder
+            } else {
 
+
+
+                if (String(n).length == 3) {
+                    if (String(value[1]).length == 2) {
+                        numIDd = `${value[0]}${value[1]}011` + res?.data[0]?.numberOrder
+                    } else {
+                        numIDd = `${value[0]}0${value[1]}011` + res?.data[0]?.numberOrder
+                    }
+                } if (String(n).length == 2) {
+                    if (String(value[1]).length == 2) {
+                        numIDd = `${value[0]}${value[1]}0110` + res?.data[0]?.numberOrder
+                    } else {
+                        numIDd = `${value[0]}0${value[1]}0110` + res?.data[0]?.numberOrder
+                    }
+                } if (String(n).length == 1) {
+                    if (String(value[1]).length == 2) {
+                        numIDd = `${value[0]}${value[1]}01100` + res?.data[0]?.numberOrder
+                    } else {
+                        numIDd = `${value[0]}0${value[1]}01100` + res?.data[0]?.numberOrder
+                    }
+
+                }
             }
-            console.log(numIDd)
+            console.log("res", res?.data)
             setMonth(res?.data[0]?.month)
             setID(parseInt(numIDd))
             setUser({ ...user, numberOrder: numIDd })
@@ -262,10 +274,31 @@ const TrackingOrders = () => {
                         const options = [];
                         const today = new Date();
                         const thisMonth = today.getMonth() + 1
+
+                        // console.log(today)
+                        // console.log(thisMonth)
+                        // console.log(today.getMonth())
+                        // console.log(today.getFullYear())
+                        // console.log(date)
+
+                        // const d = new Date(user?.createdAt)
+                        // console.log("d",user)
                         // القيمة النهائية لي بغيتي توصل ليها
-                        for (let i = thisMonth; i >= date; i--) {
+
+                        for (let i = thisMonth; i >= 1; i--) {
+                            const dateyear = `2026/${i}`
+
                             options.push(
-                                <option key={i} value={i}>
+                                <option key={i} value={dateyear}>
+                                    {i}/2026
+                                </option>
+                            );
+                        }
+
+                        for (let i = 12; i >= date; i--) {
+                            const dateyear = `2025/${i}`
+                            options.push(
+                                <option key={i} value={dateyear}>
                                     {i}/2025
                                 </option>
                             );

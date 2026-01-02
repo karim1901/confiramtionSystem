@@ -13,7 +13,7 @@ export async function POST(request) {
     try {
 
         const data = await request.json()
-        data["numberOrder"]="202508011000"
+        // data["numberOrder"]="202508011000"
 
         const user = await User.create(data)
 

@@ -30,10 +30,10 @@ const AddOrder = () => {
 
 
 
-    const incNum = async () => {
+    const incNum = async (ID) => {
         try {
-            const numTrac = await axios.put(`/api/numberOrder/${user._id}`, { numberOrder: +user.numberOrder + 1 })
-            console.log("inc Seccessfully" ,numTrac )
+            const numTrac = await axios.put(`/api/numberOrder/${user._id}`, { numberOrder: +ID + 1 })
+            console.log("inc Seccessfully", numTrac)
             ////////////////
             const res = await axios.get(`/api/numberOrder/${user._id}`)
 
@@ -72,6 +72,59 @@ const AddOrder = () => {
     };
 
     const sendOrder = async () => {
+
+        let ID = user.numberOrder
+        const today = new Date();
+        // console.log(today.getDate() , today.getMonth()+1)
+
+        // today.getDate() = 1 
+
+        if (today.getDate() == 1) {
+
+
+
+            let numIDd = user?.numberOrder.split("")
+
+            if (numIDd[11] != 1) {
+
+                console.log(numIDd)
+
+                numIDd[9] = 0
+                numIDd[10] = 0
+                numIDd[11] = 1
+
+                if (numIDd[5] <= 1) {
+                    numIDd[5] = +numIDd[5] + 1
+
+                    numIDd = numIDd.join("")
+                    setUser({ ...user, user: numIDd })
+                    ID = numIDd
+                } else {
+
+                    let mon = `${numIDd[4]}${numIDd[5]}`
+                    numIDd.splice(4, 1)
+                    console.log(mon)
+                    numIDd[4] = +mon + 1
+
+                    console.log(numIDd)
+
+                    numIDd = numIDd.join("")
+
+                    setUser({ ...user, user: numIDd })
+                    ID = numIDd
+
+                }
+            }
+
+
+
+        }
+
+        console.log(ID)
+
+
+
+
         setLoade(true)
         if (!validateInputs()) {
             setLoade(false)
@@ -87,7 +140,7 @@ const AddOrder = () => {
             formData.append("parcel-note", order['parcel-nature']);
             formData.append("parcel-price", order["parcel-price"]);
             formData.append("parcel-nature", order["parcel-nature"]);
-            formData.append("tracking-number", `${user.name}${user.numberOrder}`);
+            formData.append("tracking-number", `${user.name}${ID}`);
 
             console.log(formData)
 
@@ -103,11 +156,11 @@ const AddOrder = () => {
             // }
 
             const data = response.data
-            console.log("Order sent successfully:",data["ADD-PARCEL"], data["ADD-PARCEL"].RESULT);
+            console.log("Order sent successfully:", data["ADD-PARCEL"], data["ADD-PARCEL"].RESULT);
 
 
 
-            if ( data["ADD-PARCEL"].RESULT == "ERROR" ) {
+            if (data["ADD-PARCEL"].RESULT == "ERROR") {
                 toast.error("error created field .")
             } else {
 
@@ -124,7 +177,7 @@ const AddOrder = () => {
             });
             setSelectedCities(null);
             setErrors({});
-            incNum()
+            incNum(ID)
             setLoade(false)
 
         } catch (error) {

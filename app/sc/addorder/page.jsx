@@ -85,6 +85,8 @@ const AddOrder = () => {
 
             let numIDd = user?.numberOrder.split("")
 
+            const numOr = +`${numIDd[9]}${numIDd[10]}${numIDd[11]}`
+
             if (numIDd[11] != 1) {
 
                 console.log(numIDd)
@@ -114,6 +116,14 @@ const AddOrder = () => {
                     ID = numIDd
 
                 }
+
+                try {
+                    const res = await post.post("/api/date",{_id:user._id , month:today.getMonth(),numberOrder:numOr})
+                    console.log("number order old" , res.data)
+                } catch (error) {
+                    console.log(error.message)
+                }
+
             }
 
 

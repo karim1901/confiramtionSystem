@@ -155,6 +155,7 @@ const AddOrder = () => {
                 value: data[key].ID,
                 label: data[key].NAME
             }));
+            console.log(cityOptions)
             setCities(cityOptions);
         } catch (error) {
             console.log(error.message);

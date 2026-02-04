@@ -151,6 +151,8 @@ const TrackingOrders = () => {
                         formData
                     );
 
+                    // console.log(res.data)
+
                     if (res.data.TRACKING.RESULT !== "ERROR") {
                         const res2 = await axios.post(
                             `https://api.ozonexpress.ma/customers/${user.id}/${user.secretKey}/parcel-info`,
@@ -179,7 +181,7 @@ const TrackingOrders = () => {
                     id--;
                     setOrders([...getOrdersList]);
                 } catch (error) {
-                    console.log("Error:", error.message);
+                    console.log("Error:", error);
                 }
             }
         };
@@ -205,8 +207,16 @@ const TrackingOrders = () => {
         const today = new Date();
         const thisMonth = today.getMonth() + 1
         if (value[1] == thisMonth) {
-            console.log(USER?.numberOrder)
-            setUser({ ...user, numberOrder: USER?.numberOrder })
+            try {
+                const res = await axios.get(`/api/numberOrder/${user._id}`)
+
+                console.log(res.data?.numberOrder)
+                setUser(res.data)
+
+            } catch (error) {
+                console.log(error.message)
+            }
+
         } else {
 
             console.log("value", value[1])
@@ -226,9 +236,9 @@ const TrackingOrders = () => {
             let numIDd
             const n = res?.data[0]?.numberOrder
 
-            console.log("n",n)
+            console.log("n", n)
 
-            if (res.length==0) {
+            if (res.length == 0) {
                 // numIDd = `${value[0]}${value[1]}011` + res?.data[0]?.numberOrder
             } else {
 
@@ -430,3 +440,6 @@ const TrackingOrders = () => {
 }
 
 export default TrackingOrders
+
+
+

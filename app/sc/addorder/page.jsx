@@ -81,7 +81,7 @@ const AddOrder = () => {
 
         let numIDd = user?.numberOrder.split("")
 
-        if (numIDd[5] < today.getMonth() + 1) {
+        if (numIDd[5] < today.getMonth()+1) {
 
             // 202602011060
 

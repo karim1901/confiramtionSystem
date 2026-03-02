@@ -79,52 +79,52 @@ const AddOrder = () => {
 
         // today.getDate() = 1 
 
-        if (today.getDate() == 1) {
+        let numIDd = user?.numberOrder.split("")
 
+        if (numIDd[5] < today.getMonth() + 1) {
 
-
-            let numIDd = user?.numberOrder.split("")
+            // 202602011060
 
             const numOr = +`${numIDd[9]}${numIDd[10]}${numIDd[11]}`
 
-            if (numIDd[11] != 1) {
+
+            console.log(numIDd)
+
+            numIDd[9] = 0
+            numIDd[10] = 0
+            numIDd[11] = 1
+
+            if (numIDd[5] < 9) {
+                numIDd[5] = +numIDd[5] + 1
+
+                numIDd = numIDd.join("")
+                setUser({ ...user, user: numIDd })
+                ID = numIDd
+            } else {
+
+                let mon = `${numIDd[4]}${numIDd[5]}`
+                numIDd.splice(4, 1)
+                console.log(mon)
+                numIDd[4] = +mon + 1
 
                 console.log(numIDd)
 
-                numIDd[9] = 0
-                numIDd[10] = 0
-                numIDd[11] = 1
+                numIDd = numIDd.join("")
 
-                if (numIDd[5] <= 1) {
-                    numIDd[5] = +numIDd[5] + 1
-
-                    numIDd = numIDd.join("")
-                    setUser({ ...user, user: numIDd })
-                    ID = numIDd
-                } else {
-
-                    let mon = `${numIDd[4]}${numIDd[5]}`
-                    numIDd.splice(4, 1)
-                    console.log(mon)
-                    numIDd[4] = +mon + 1
-
-                    console.log(numIDd)
-
-                    numIDd = numIDd.join("")
-
-                    setUser({ ...user, user: numIDd })
-                    ID = numIDd
-
-                }
-
-                try {
-                    const res = await post.post("/api/date",{_id:user._id , month:today.getMonth(),numberOrder:numOr})
-                    console.log("number order old" , res.data)
-                } catch (error) {
-                    console.log(error.message)
-                }
+                setUser({ ...user, user: numIDd })
+                ID = numIDd
 
             }
+
+            try {
+                console.log("show user", user._id)
+                const res = await axios.post("/api/date", { user: user._id, month: (today.getMonth()), numberOrder: numOr })
+                console.log("number order old", res.data)
+            } catch (error) {
+                console.log(error.message)
+            }
+
+            // }
 
 
 
